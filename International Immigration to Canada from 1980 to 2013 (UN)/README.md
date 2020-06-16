@@ -1,25 +1,25 @@
 # International Immigration to Canada from 1980 to 2013 (UN)
 
 ### I. Data Cleaning 
-- 1. Remove columns that are not imformative \
+-  Remove columns that are not imformative \
 ```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
 
 ### II. Data Transformation
-- 1. Rename some of the columns so that they make sense \
+- Rename some of the columns so that they make sense \
 ```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)```
-- 1. For consistency, change types of all column labels to string type
+-  For consistency, change types of all column labels to string type
 ```df_can.columns = list(map(str, df_can.columns))```
 ```all(isinstance(column, str) for column in df_can.columns)```
-- 1. Set the country name as index - useful for quickly looking up countries \
+-  Set the country name as index - useful for quickly looking up countries \
 ```df_can.set_index('Country', inplace = True)```
-- 1. Add total column \
+-  Add total column \
 ```df_can['Total'] = df_can.sum(axis =1)```
 
 ### III. Data Visualization
 
 #### Line Plots
 What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
-
+<img width="652" alt="Screen Shot 2020-06-15 at 8 59 55 PM" src="https://user-images.githubusercontent.com/46945617/84721005-9d064d80-af4d-11ea-9828-4ec2ba82a563.png">
 
 #### Area Plots or Stacked Line Plot 
 - Select top 5 countries 
