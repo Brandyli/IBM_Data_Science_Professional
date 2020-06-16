@@ -14,6 +14,11 @@
 ```df_can.set_index('Country', inplace = True)```
 -  Add total column \
 ```df_can['Total'] = df_can.sum(axis =1)```
+- Years that we will be using for plotting later on \
+```
+years = list(map(str, range(1980, 2014)))
+print('data dimensions:', df_can.shape)
+```
 
 ### III. Data Visualization
 
@@ -200,3 +205,35 @@ for index, value in enumerate(top15):
 plt.show()
 ```
 <img width="708" alt="Screen Shot 2020-06-15 at 9 15 54 PM" src="https://user-images.githubusercontent.com/46945617/84721032-ad1e2d00-af4d-11ea-8e82-c760fd6eda78.png">
+
+#### Pie Chart
+What is the immigration to canada by continent in 2013?
+```
+# group countries by continents and apply sum() function 
+df_continents = df_can.groupby('Continent', axis=0).sum()
+
+colors_list = ['gold', 'yellowgreen', 'coral', 'skyblue', 'green', 'pink']
+explode_list = [0.1, 0, 0, 0, 0.1, 0.1] # ratio for each continent with which to offset each wedge.
+
+df_2013.plot(kind = 'pie', figsize = (15,6),
+             shadow = True, pctdistance = 1.12,
+             startangle = 90, autopct = '%1.1f%%',
+             colors = colors_list, labels = None,
+             explode = explode_list, subplots = True
+            )
+
+plt.title('Immigration to Canada by Continent in 2013', y = 1.12)
+plt.axis('equal')
+
+plt.show()
+```
+#### Box Plots
+What is the distribution of the number of new immigrants from India and China for the period 1980 - 2013?
+```
+df_CI = df_can.loc[['China', 'India'], years].transpose()
+df_CI.plot(kind = 'box', figsize = (8,6))
+
+plt.title('Box plot of Chinese and Indian Immigrants to Canada from 1980 - 2013')
+plt.ylabel('Number of Immigrants')
+plt.show()
+```
