@@ -19,7 +19,7 @@
 
 #### Line Plots
 What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
-<img width="652" alt="Screen Shot 2020-06-15 at 8 59 55 PM" src="https://user-images.githubusercontent.com/46945617/84721005-9d064d80-af4d-11ea-9828-4ec2ba82a563.png">
+<img width="929" alt="Line Graph" src="https://user-images.githubusercontent.com/46945617/84721008-9ed01100-af4d-11ea-8bab-5d05e74db24a.png">
 
 #### Area Plots or Stacked Line Plot 
 - Select top 5 countries 
