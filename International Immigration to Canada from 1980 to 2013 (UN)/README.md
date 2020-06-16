@@ -238,3 +238,28 @@ plt.ylabel('Number of Immigrants')
 plt.show()
 ```
 What is the distribution of the top 15 countries (based on total immigration) among 1980s, 1990s, and 2000s?
+
+Create a new dataframe which contains the aggregate for each decade:
+
+* Create a list of all years in decades 80's, 90's, and 00's.
+* Slice the original dataframe df_can to create a series for each decade and sum across all years for each country.
+* Merge the three series into a new data frame.
+```
+
+yr_80s = list(map(str, range(1980, 1990)))
+yr_90s = list(map(str, range(1990, 2000)))
+yr_00s = list(map(str, range(2000, 2010)))
+
+df_80s = top15.loc[:, yr_80s].sum(axis = 1)
+df_90s = top15.loc[:, yr_90s].sum(axis = 1)
+df_00s = top15.loc[:, yr_00s].sum(axis = 1)
+
+new_df = pd.DataFrame({'1980s':df_80s, '1990s':df_90s, '2000s':df_00s})
+
+new_df.plot(kind='box', color='blue',figsize=(10, 6)) 
+plt.title('Top 15 immigrantion countries in 1980s, 1990s, and 2000s.')
+plt.xlabel('Years')
+plt.ylabel('Number of Immigrants')
+```
+#### Scatter Plots
+What is the total immigration from Denmark, Norway, and Sweden to Canada from 1980 to 2013?
