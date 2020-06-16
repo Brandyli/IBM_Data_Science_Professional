@@ -1,17 +1,18 @@
 # International Immigration to Canada from 1980 to 2013 (UN)
 
-### I. Data Cleaning 
+## I. Data Cleaning 
 
 -  Remove columns that are not imformative \
 ```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
 
-### II. Data Transformation
+## II. Data Transformation
 
 - Rename some of the columns so that they make sense \
 ```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)```
 -  For consistency, change types of all column labels to string type
 ```df_can.columns = list(map(str, df_can.columns))
-all(isinstance(column, str) for column in df_can.columns)```
+all(isinstance(column, str) for column in df_can.columns)
+```
 -  Set the country name as index - useful for quickly looking up countries \
 ```df_can.set_index('Country', inplace = True)```
 -  Add total column \
@@ -21,13 +22,20 @@ all(isinstance(column, str) for column in df_can.columns)```
 print('data dimensions:', df_can.shape)
 ```
 
-### III. Data Visualization
-
-#### Line Plots
+## III. Data Visualization
+- Line Plots \
+- Area Plots \
+- Histograms \
+- Bar Charts - Horizontal & Vertical bars \
+- Pie Charts \
+- Box Plots \
+- Scatter Plots
+- Bubble Plots \
+### Line Plots
 ##### What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
 <img width="929" alt="Line Graph" src="https://user-images.githubusercontent.com/46945617/84721008-9ed01100-af4d-11ea-8bab-5d05e74db24a.png">
 
-#### Area Plots or Stacked Line Plot 
+### Area Plots or Stacked Line Plots 
 - Select top 5 countries 
 ```df_can.sort_values(['Total'], ascending = False, axis = 0, inplace = True)```
 ```# transpose the dataframe
@@ -81,7 +89,7 @@ plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/46945617/84797369-bba92a80-afc7-11ea-8875-a494710a794a.png)
 
-#### Histograms
+### Histograms
 ##### What is the frequency distribution of the number (population) of new immigrants from the various countries to Canada in 2013?
 
 ```
@@ -144,11 +152,11 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 ```
+![image](https://user-images.githubusercontent.com/46945617/84798037-7afde100-afc8-11ea-9eb1-2653430e4ad2.png)
 
-<img width="621" alt="Screen Shot 2020-06-15 at 9 06 18 PM" src="https://user-images.githubusercontent.com/46945617/84721025-a7284c00-af4d-11ea-9839-27851c6ad580.png">
 
-#### Bar Charts
-##### Vertical bar plot
+### Bar Charts
+#### Vertical bar plot
 ##### What are Icelandic immigrants (country = 'Iceland') to Canada from year 1980 to 2013?
 ```
 Step 1: get the data
@@ -182,7 +190,7 @@ plt.show()
 ```
 <img width="620" alt="Screen Shot 2020-06-15 at 9 08 12 PM" src="https://user-images.githubusercontent.com/46945617/84721029-aabbd300-af4d-11ea-88bd-5114d8cce6ac.png">
 
-##### Horizontal Bar Plot
+#### Horizontal Bar Plot
 ##### What are the top 15 countries?
 ```
 df_can.sort_values(by = 'Total', ascending = True, inplace = True)
@@ -206,8 +214,8 @@ plt.show()
 ```
 <img width="708" alt="Screen Shot 2020-06-15 at 9 15 54 PM" src="https://user-images.githubusercontent.com/46945617/84721032-ad1e2d00-af4d-11ea-8e82-c760fd6eda78.png">
 
-#### Pie Chart
-What is the immigration to canada by continent in 2013?
+### Pie Charts
+##### What is the immigration to canada by continent in 2013?
 ```
 # group countries by continents and apply sum() function 
 df_continents = df_can.groupby('Continent', axis=0).sum()
@@ -229,8 +237,8 @@ plt.show()
 ```
 <img width="619" alt="Screen Shot 2020-06-16 at 8 05 54 AM" src="https://user-images.githubusercontent.com/46945617/84795828-f90cb880-afc5-11ea-9adc-2cc4c04583a8.png">
 
-#### Box Plots
-What is the distribution of the number of new immigrants from India and China for the period 1980 - 2013?
+### Box Plots
+##### What is the distribution of the number of new immigrants from India and China for the period 1980 - 2013?
 ```
 df_CI = df_can.loc[['China', 'India'], years].transpose()
 df_CI.plot(kind = 'box', figsize = (8,6))
@@ -241,7 +249,7 @@ plt.show()
 ```
 <img width="605" alt="Screen Shot 2020-06-16 at 11 41 29 AM" src="https://user-images.githubusercontent.com/46945617/84796176-57399b80-afc6-11ea-8938-b30284ab1b73.png">
 
-What is the distribution of the top 15 countries (based on total immigration) among 1980s, 1990s, and 2000s?
+##### What is the distribution of the top 15 countries (based on total immigration) among 1980s, 1990s, and 2000s?
 
 Create a new dataframe which contains the aggregate for each decade:
 
@@ -266,7 +274,7 @@ plt.ylabel('Number of Immigrants')
 ```
 <img width="636" alt="Screen Shot 2020-06-16 at 11 40 30 AM" src="https://user-images.githubusercontent.com/46945617/84796044-36714600-afc6-11ea-9ef3-b8bbd0595540.png">
 
-#### Scatter Plots
+### Scatter Plots
 ##### What is the total immigration from Denmark, Norway, and Sweden to Canada from 1980 to 2013?
 ```
 df_countries = df_can.loc[['Denmark', 'Norway', 'Sweden'], years].transpose()
