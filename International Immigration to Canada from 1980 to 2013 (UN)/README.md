@@ -30,7 +30,7 @@ df_top5 = df_top5[years].transpose()```
 ```df_top5.index = df_top5.index.map(int) # let's change the index values of df_top5 to type integer for plotting
 ```
 ``` 
-# Option 1: This is what we have been using so far
+Option 1: This is what we have been using so far
 df_top5.plot(kind='area', alpha=0.35, figsize=(20, 10)) 
 plt.title('Immigration trend of top 5 countries')
 plt.ylabel('Number of immigrants')
@@ -38,7 +38,7 @@ plt.xlabel('Years')
 ```
 <img width="652" alt="Screen Shot 2020-06-15 at 8 59 55 PM" src="https://user-images.githubusercontent.com/46945617/84721005-9d064d80-af4d-11ea-9828-4ec2ba82a563.png">
 ```
-# option 2: preferred option with more flexibility
+Option 2: preferred option with more flexibility
 ax = df_top5.plot(kind='area', alpha=0.35, figsize=(20, 10))
 
 ax.set_title('Immigration Trend of Top 5 Countries')
@@ -49,14 +49,14 @@ What are least 5 countries contributing the most immigrants to Canada from 1980 
 
 - Select least 5 countries 
 ```
-# get the 5 countries with the least contribution
+Get the 5 countries with the least contribution
 df_least5 = df_can.tail()
 
-# transpose the dataframe
+Transpose the dataframe
 df_least5 = df_least5[years].transpose()
 ```
 ```
-# Method 1
+Method 1
 df_least5.index = df_least5.index.map(int)
 ax = df_least5.plot(kind = 'area', stacked=False, alpha = 0.45, figsize = (20,10))
 ax.set_title('Immigration Trend of 5 Countries with Least Contribution to Immigration')
@@ -65,7 +65,7 @@ ax.set_xlabel('Years')
 ```
 <img width="852" alt="Screen Shot 2020-06-15 at 9 00 28 PM" src="https://user-images.githubusercontent.com/46945617/84721012-a0013e00-af4d-11ea-8d6b-7585e0fa42ff.png">
 ```
-# Method 2
+Method 2
 df_least5.index = df_least5.index.map(int) # let's change the index values of df_least5 to type integer for plotting
 df_least5.plot(kind='area', alpha=0.45, figsize=(20, 10)) 
 
@@ -78,10 +78,9 @@ plt.show()
 <img width="848" alt="Screen Shot 2020-06-15 at 9 00 41 PM" src="https://user-images.githubusercontent.com/46945617/84721013-a1cb0180-af4d-11ea-950c-24582809a0bd.png">
 
 #### Histograms
-What is the frequency distribution of the number (population) of new immigrants from the various countries to Canada in 2013?
+##### What is the frequency distribution of the number (population) of new immigrants from the various countries to Canada in 2013?
 
 ```
-# 'bin_edges' is a list of bin intervals
 count, bin_edges = np.histogram(df_can['2013'])
 
 df_can['2013'].plot(kind = 'hist', figsize = (10, 8), xticks = bin_edges)
@@ -92,16 +91,16 @@ plt.xlabel('Number of Immigrants') # add x-label
 
 plt.show()
 ```
- What is the immigration distribution for Denmark, Norway, and Sweden for years 1980 - 2013?
+##### What is the immigration distribution for Denmark, Norway, and Sweden for years 1980 - 2013?
  ```
-# transpose dataframe
+Transpose dataframe
 df_t = df_can.loc[['Denmark', 'Norway', 'Sweden'], years].transpose()
  ```
  ```
- # let's get the x-tick values
+Let's get the x-tick values
 count, bin_edges = np.histogram(df_t, 15)
 
-# un-stacked histogram
+Un-stacked histogram
 df_t.plot(kind ='hist', 
           figsize=(10, 6),
           bins=15,
@@ -118,7 +117,7 @@ plt.show()
 ```
 <img width="656" alt="Screen Shot 2020-06-15 at 9 05 07 PM" src="https://user-images.githubusercontent.com/46945617/84721021-a42d5b80-af4d-11ea-97de-5f52e698a502.png">
 
-What are the immigration distribution for Greece, Albania, and Bulgaria for years 1980 - 2013?
+##### What are the immigration distribution for Greece, Albania, and Bulgaria for years 1980 - 2013?
 
 ```
 df_t2 = df_can.loc[['Greece', 'Albania', 'Bulgaria'], years].transpose()
@@ -147,9 +146,9 @@ plt.show()
 
 #### Bar Charts
 ##### Vertical bar plot
-What are Icelandic immigrants (country = 'Iceland') to Canada from year 1980 to 2013?
+##### What are Icelandic immigrants (country = 'Iceland') to Canada from year 1980 to 2013?
 ```
-# step 1: get the data
+Step 1: get the data
 df_iceland = df_can.loc['Iceland', years]
 df_iceland.head()
 ```
@@ -160,7 +159,7 @@ plt.xlabel('Year')
 plt.ylabel('Number of Immigrants')
 plt.title('Icelandic Immigrants to Canada from 1980 to 2013')
 
-# Annotate arrow
+Annotate arrow
 plt.annotate('',                      # s: str. will leave it blank for no text
              xy=(32, 70),             # place head of the arrow at point (year 2012 , pop 70)
              xytext=(28, 20),         # place base of the arrow at point (year 2008 , pop 20)
@@ -181,7 +180,7 @@ plt.show()
 <img width="620" alt="Screen Shot 2020-06-15 at 9 08 12 PM" src="https://user-images.githubusercontent.com/46945617/84721029-aabbd300-af4d-11ea-88bd-5114d8cce6ac.png">
 
 ##### Horizontal Bar Plot
-What are the top 15 countries?
+##### What are the top 15 countries?
 ```
 df_can.sort_values(by = 'Total', ascending = True, inplace = True)
 top15 = df_can['Total'].tail(15)
@@ -193,7 +192,7 @@ plt.xlabel('Number of Immigrants')
 plt.ylabel('Year')
 plt.title('Immigrants of Top 15 countries to Canada from 1980 to 2013')
 
-# annotate value labels to each country
+Annotate value labels to each country
 for index, value in enumerate(top15): 
     label = format(int(value), ',') # format int with commas
     
