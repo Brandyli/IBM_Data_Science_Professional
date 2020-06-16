@@ -5,14 +5,14 @@
 ```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
 
 ### II. Data Transformation
-- 1. Rename some of the columns so that they make sense
+- 1. Rename some of the columns so that they make sense \
 ```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)```
 - 1. For consistency, change types of all column labels to string type
 ```df_can.columns = list(map(str, df_can.columns))```
 ```all(isinstance(column, str) for column in df_can.columns)```
-- 1. Set the country name as index - useful for quickly looking up countries
+- 1. Set the country name as index - useful for quickly looking up countries \
 ```df_can.set_index('Country', inplace = True)```
-- 1. Add total column
+- 1. Add total column \
 ```df_can['Total'] = df_can.sum(axis =1)```
 
 ### III. Data Visualization
