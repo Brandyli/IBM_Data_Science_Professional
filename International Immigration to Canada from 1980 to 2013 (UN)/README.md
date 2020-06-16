@@ -3,34 +3,37 @@
 ## I. Data Cleaning 
 
 -  Remove columns that are not imformative \
-```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
-
+```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)
+```
 ## II. Data Transformation
 
 - Rename some of the columns so that they make sense \
-```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)```
+```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)
+```
 -  For consistency, change types of all column labels to string type
 ```df_can.columns = list(map(str, df_can.columns))
 all(isinstance(column, str) for column in df_can.columns)
 ```
 -  Set the country name as index - useful for quickly looking up countries \
-```df_can.set_index('Country', inplace = True)```
+```df_can.set_index('Country', inplace = True)
+```
 -  Add total column \
-```df_can['Total'] = df_can.sum(axis =1)```
+```df_can['Total'] = df_can.sum(axis =1)
+```
 - Years that we will be using for plotting later on \
 ```years = list(map(str, range(1980, 2014)))
 print('data dimensions:', df_can.shape)
 ```
 
 ## III. Data Visualization
-- Line Plots \
-- Area Plots \
-- Histograms \
-- Bar Charts - Horizontal & Vertical bars \
-- Pie Charts \
-- Box Plots \
+- Line Plots 
+- Area Plots 
+- Histograms 
+- Bar Charts - Horizontal & Vertical bars 
+- Pie Charts 
+- Box Plots 
 - Scatter Plots
-- Bubble Plots \
+- Bubble Plots 
 ### Line Plots
 ##### What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
 <img width="929" alt="Line Graph" src="https://user-images.githubusercontent.com/46945617/84721008-9ed01100-af4d-11ea-8bab-5d05e74db24a.png">
