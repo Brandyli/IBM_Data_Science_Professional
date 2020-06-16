@@ -237,3 +237,4 @@ plt.title('Box plot of Chinese and Indian Immigrants to Canada from 1980 - 2013'
 plt.ylabel('Number of Immigrants')
 plt.show()
 ```
+What is the distribution of the top 15 countries (based on total immigration) among 1980s, 1990s, and 2000s?
