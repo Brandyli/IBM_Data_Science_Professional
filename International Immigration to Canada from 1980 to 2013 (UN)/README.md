@@ -20,7 +20,6 @@
 #### Line Plots
 What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
 
-<img width="929" alt="Line Graph" src="https://user-images.githubusercontent.com/46945617/84721008-9ed01100-af4d-11ea-8bab-5d05e74db24a.png">
 
 #### Area Plots or Stacked Line Plot 
 - Select top 5 countries 
@@ -115,7 +114,7 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 ```
-
+![image](https://user-images.githubusercontent.com/46945617/84721214-2289fd80-af4e-11ea-808e-7c25b504ddb2.png)
 ##### What are the immigration distribution for Greece, Albania, and Bulgaria for years 1980 - 2013?
 
 ```
@@ -140,7 +139,7 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 ```
-![image](https://user-images.githubusercontent.com/46945617/84721214-2289fd80-af4e-11ea-808e-7c25b504ddb2.png)
+
 <img width="621" alt="Screen Shot 2020-06-15 at 9 06 18 PM" src="https://user-images.githubusercontent.com/46945617/84721025-a7284c00-af4d-11ea-9839-27851c6ad580.png">
 
 #### Bar Charts
