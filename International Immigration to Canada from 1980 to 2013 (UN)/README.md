@@ -1,29 +1,30 @@
 # International Immigration to Canada from 1980 to 2013 (UN)
 
 ### I. Data Cleaning 
+
 -  Remove columns that are not imformative \
 ```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
 
 ### II. Data Transformation
+
 - Rename some of the columns so that they make sense \
 ```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)```
 -  For consistency, change types of all column labels to string type
-```df_can.columns = list(map(str, df_can.columns))```
-```all(isinstance(column, str) for column in df_can.columns)```
+```df_can.columns = list(map(str, df_can.columns))
+all(isinstance(column, str) for column in df_can.columns)```
 -  Set the country name as index - useful for quickly looking up countries \
 ```df_can.set_index('Country', inplace = True)```
 -  Add total column \
 ```df_can['Total'] = df_can.sum(axis =1)```
 - Years that we will be using for plotting later on \
-```
-years = list(map(str, range(1980, 2014)))
+```years = list(map(str, range(1980, 2014)))
 print('data dimensions:', df_can.shape)
 ```
 
 ### III. Data Visualization
 
 #### Line Plots
-What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
+##### What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
 <img width="929" alt="Line Graph" src="https://user-images.githubusercontent.com/46945617/84721008-9ed01100-af4d-11ea-8bab-5d05e74db24a.png">
 
 #### Area Plots or Stacked Line Plot 
@@ -32,25 +33,24 @@ What are top 5 countries contributing the most immigrants to Canada from 1980 to
 ```# transpose the dataframe
 df_top5 = df_top5[years].transpose()```
 ```df_top5.index = df_top5.index.map(int) # let's change the index values of df_top5 to type integer for plotting
+
 Option 1: This is what we have been using so far
 df_top5.plot(kind='area', alpha=0.35, figsize=(20, 10)) 
 plt.title('Immigration trend of top 5 countries')
 plt.ylabel('Number of immigrants')
 plt.xlabel('Years')
-```
-<img width="652" alt="Screen Shot 2020-06-15 at 8 59 55 PM" src="https://user-images.githubusercontent.com/46945617/84721005-9d064d80-af4d-11ea-9828-4ec2ba82a563.png">
 
 Option 2: preferred option with more flexibility
-```
 ax = df_top5.plot(kind='area', alpha=0.35, figsize=(20, 10))
 
 ax.set_title('Immigration Trend of Top 5 Countries')
 ax.set_ylabel('Number of Immigrants')
 ax.set_xlabel('Years')
 ```
-What are least 5 countries contributing the most immigrants to Canada from 1980 to 2013?
-- Select least 5 countries 
+![image](https://user-images.githubusercontent.com/46945617/84796824-18581580-afc7-11ea-857f-51f7e9c08707.png)
 
+##### What are least 5 countries contributing the most immigrants to Canada from 1980 to 2013?
+ 
 ```
 Get the 5 countries with the least contribution
 df_least5 = df_can.tail()
@@ -66,7 +66,7 @@ ax.set_title('Immigration Trend of 5 Countries with Least Contribution to Immigr
 ax.set_ylabel('Number of Immigrants')
 ax.set_xlabel('Years')
 ```
-<img width="852" alt="Screen Shot 2020-06-15 at 9 00 28 PM" src="https://user-images.githubusercontent.com/46945617/84721012-a0013e00-af4d-11ea-8d6b-7585e0fa42ff.png">
+![image](https://user-images.githubusercontent.com/46945617/84797318-ad5b0e80-afc7-11ea-8e6a-11cd0cca7c5d.png)
 
 ```
 Method 2
@@ -79,7 +79,7 @@ plt.xlabel('Years')
 
 plt.show()
 ```
-<img width="848" alt="Screen Shot 2020-06-15 at 9 00 41 PM" src="https://user-images.githubusercontent.com/46945617/84721013-a1cb0180-af4d-11ea-950c-24582809a0bd.png">
+![image](https://user-images.githubusercontent.com/46945617/84797369-bba92a80-afc7-11ea-8875-a494710a794a.png)
 
 #### Histograms
 ##### What is the frequency distribution of the number (population) of new immigrants from the various countries to Canada in 2013?
@@ -249,7 +249,6 @@ Create a new dataframe which contains the aggregate for each decade:
 * Slice the original dataframe df_can to create a series for each decade and sum across all years for each country.
 * Merge the three series into a new data frame.
 ```
-
 yr_80s = list(map(str, range(1980, 1990)))
 yr_90s = list(map(str, range(1990, 2000)))
 yr_00s = list(map(str, range(2000, 2010)))
@@ -266,8 +265,9 @@ plt.xlabel('Years')
 plt.ylabel('Number of Immigrants')
 ```
 <img width="636" alt="Screen Shot 2020-06-16 at 11 40 30 AM" src="https://user-images.githubusercontent.com/46945617/84796044-36714600-afc6-11ea-9ef3-b8bbd0595540.png">
+
 #### Scatter Plots
-What is the total immigration from Denmark, Norway, and Sweden to Canada from 1980 to 2013?
+##### What is the total immigration from Denmark, Norway, and Sweden to Canada from 1980 to 2013?
 ```
 df_countries = df_can.loc[['Denmark', 'Norway', 'Sweden'], years].transpose()
 df_total = pd.DataFrame(df_countries.sum(axis = 1))
@@ -286,7 +286,7 @@ plt.show()
 <img width="703" alt="Screen Shot 2020-06-16 at 11 23 03 AM" src="https://user-images.githubusercontent.com/46945617/84795853-0164f380-afc6-11ea-993d-e0159f91ee05.png">
 
 #### Bubble Plots
-What is the immigration from China and India from 1980 to 2013?
+##### What is the immigration from China and India from 1980 to 2013?
 ```
 df_can_t = df_can[years].transpose() # transposed dataframe
 
@@ -301,12 +301,14 @@ df_can_t.reset_index(inplace=True)
 
 # view the changes
 df_can_t.head()
-
+```
+```
 # normalize China data
 norml_China = (df_can_t['China'] - df_can_t['China'].min()) / (df_can_t['China'].max() - df_can_t['China'].min()) 
 # normalize India data
 norml_India = (df_can_t['India'] - df_can_t['India'].min()) / (df_can_t['India'].max() - df_can_t['India'].min())
-
+```
+```
 # China
 ax0 = df_can_t.plot(kind='scatter',
                     x='Year',
