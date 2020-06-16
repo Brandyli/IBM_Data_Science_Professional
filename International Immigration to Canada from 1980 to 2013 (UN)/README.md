@@ -1,7 +1,7 @@
 # International Immigration to Canada from 1980 to 2013 (UN)
 
 ### I. Data Cleaning 
-- 1. Remove columns that are not imformative 
+- 1. Remove columns that are not imformative \
 ```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
 
 ### II. Data Transformation
