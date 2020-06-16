@@ -115,7 +115,6 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 ```
-<img width="656" alt="Screen Shot 2020-06-15 at 9 05 07 PM" src="https://user-images.githubusercontent.com/46945617/84721021-a42d5b80-af4d-11ea-97de-5f52e698a502.png">
 
 ##### What are the immigration distribution for Greece, Albania, and Bulgaria for years 1980 - 2013?
 
