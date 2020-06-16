@@ -227,6 +227,8 @@ plt.axis('equal')
 
 plt.show()
 ```
+<img width="619" alt="Screen Shot 2020-06-16 at 8 05 54 AM" src="https://user-images.githubusercontent.com/46945617/84795828-f90cb880-afc5-11ea-9adc-2cc4c04583a8.png">
+
 #### Box Plots
 What is the distribution of the number of new immigrants from India and China for the period 1980 - 2013?
 ```
@@ -237,6 +239,8 @@ plt.title('Box plot of Chinese and Indian Immigrants to Canada from 1980 - 2013'
 plt.ylabel('Number of Immigrants')
 plt.show()
 ```
+<img width="605" alt="Screen Shot 2020-06-16 at 11 41 29 AM" src="https://user-images.githubusercontent.com/46945617/84796176-57399b80-afc6-11ea-8938-b30284ab1b73.png">
+
 What is the distribution of the top 15 countries (based on total immigration) among 1980s, 1990s, and 2000s?
 
 Create a new dataframe which contains the aggregate for each decade:
@@ -261,5 +265,71 @@ plt.title('Top 15 immigrantion countries in 1980s, 1990s, and 2000s.')
 plt.xlabel('Years')
 plt.ylabel('Number of Immigrants')
 ```
+<img width="636" alt="Screen Shot 2020-06-16 at 11 40 30 AM" src="https://user-images.githubusercontent.com/46945617/84796044-36714600-afc6-11ea-9ef3-b8bbd0595540.png">
 #### Scatter Plots
 What is the total immigration from Denmark, Norway, and Sweden to Canada from 1980 to 2013?
+```
+df_countries = df_can.loc[['Denmark', 'Norway', 'Sweden'], years].transpose()
+df_total = pd.DataFrame(df_countries.sum(axis = 1))
+df_total.reset_index (inplace = True)
+df_total.index = map(str, df_total.index)
+df_total.columns = ['year', 'total']
+
+df_total.plot(kind = 'scatter', x ='year', y = 'total', color = 'darkblue',figsize=(10, 6))
+
+plt.title('Total Immigration of  to Canada from 1980 - 2013')
+plt.xlabel('Year')
+plt.ylabel('Number of Immigrants')
+
+plt.show()
+```
+<img width="703" alt="Screen Shot 2020-06-16 at 11 23 03 AM" src="https://user-images.githubusercontent.com/46945617/84795853-0164f380-afc6-11ea-993d-e0159f91ee05.png">
+
+#### Bubble Plots
+What is the immigration from China and India from 1980 to 2013?
+```
+df_can_t = df_can[years].transpose() # transposed dataframe
+
+# cast the Years (the index) to type int
+df_can_t.index = map(int, df_can_t.index)
+
+# let's label the index. This will automatically be the column name when we reset the index
+df_can_t.index.name = 'Year'
+
+# reset index to bring the Year in as a column
+df_can_t.reset_index(inplace=True)
+
+# view the changes
+df_can_t.head()
+
+# normalize China data
+norml_China = (df_can_t['China'] - df_can_t['China'].min()) / (df_can_t['China'].max() - df_can_t['China'].min()) 
+# normalize India data
+norml_India = (df_can_t['India'] - df_can_t['India'].min()) / (df_can_t['India'].max() - df_can_t['India'].min())
+
+# China
+ax0 = df_can_t.plot(kind='scatter',
+                    x='Year',
+                    y='China',
+                    figsize=(14, 8),
+                    alpha=0.5,                  # transparency
+                    color='red',
+                    s=norml_China * 2000 + 10,  # pass in weights 
+                    xlim=(1975, 2015)
+                   )
+
+# India
+ax1 = df_can_t.plot(kind='scatter',
+                    x='Year',
+                    y='India',
+                    alpha=0.5,
+                    color="darkblue",
+                    s=norml_India * 2000 + 10,
+                    ax = ax0
+                   )
+
+ax0.set_ylabel('Number of Immigrants')
+ax0.set_title('Immigration from China and India from 1980 - 2013')
+ax0.legend(['China', 'India'], loc='upper left', fontsize='x-large')
+```
+<img width="874" alt="Screen Shot 2020-06-16 at 11 37 40 AM" src="https://user-images.githubusercontent.com/46945617/84795875-06c23e00-afc6-11ea-86d4-34c4aa35db22.png">
