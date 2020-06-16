@@ -5,20 +5,22 @@
 ```df_can.drop(['AREA', 'REG', 'DEV', 'Type', 'Coverage'], axis = 1, inplace = True)```
 
 ### II. Data Transformation
-- 2. Rename some of the columns so that they make sense
+- 1. Rename some of the columns so that they make sense
 ```df_can.rename(columns={'OdName':'Country', 'AreaName':'Continent','RegName':'Region'}, inplace=True)```
-- 3. For consistency, change types of all column labels to string type
+- 1. For consistency, change types of all column labels to string type
 ```df_can.columns = list(map(str, df_can.columns))```
 ```all(isinstance(column, str) for column in df_can.columns)```
-- 4. Set the country name as index - useful for quickly looking up countries
+- 1. Set the country name as index - useful for quickly looking up countries
 ```df_can.set_index('Country', inplace = True)```
-- 5. Add total column
+- 1. Add total column
 ```df_can['Total'] = df_can.sum(axis =1)```
 
 ### III. Data Visualization
 
 #### Line Plots
 What are top 5 countries contributing the most immigrants to Canada from 1980 to 2013?
+
+<img width="929" alt="Line Graph" src="https://user-images.githubusercontent.com/46945617/84721008-9ed01100-af4d-11ea-8bab-5d05e74db24a.png">
 
 #### Area Plots or Stacked Line Plot 
 - Select top 5 countries 
@@ -34,6 +36,7 @@ plt.title('Immigration trend of top 5 countries')
 plt.ylabel('Number of immigrants')
 plt.xlabel('Years')
 ```
+<img width="652" alt="Screen Shot 2020-06-15 at 8 59 55 PM" src="https://user-images.githubusercontent.com/46945617/84721005-9d064d80-af4d-11ea-9828-4ec2ba82a563.png">
 ```
 # option 2: preferred option with more flexibility
 ax = df_top5.plot(kind='area', alpha=0.35, figsize=(20, 10))
@@ -60,6 +63,7 @@ ax.set_title('Immigration Trend of 5 Countries with Least Contribution to Immigr
 ax.set_ylabel('Number of Immigrants')
 ax.set_xlabel('Years')
 ```
+<img width="852" alt="Screen Shot 2020-06-15 at 9 00 28 PM" src="https://user-images.githubusercontent.com/46945617/84721012-a0013e00-af4d-11ea-8d6b-7585e0fa42ff.png">
 ```
 # Method 2
 df_least5.index = df_least5.index.map(int) # let's change the index values of df_least5 to type integer for plotting
@@ -71,6 +75,7 @@ plt.xlabel('Years')
 
 plt.show()
 ```
+<img width="848" alt="Screen Shot 2020-06-15 at 9 00 41 PM" src="https://user-images.githubusercontent.com/46945617/84721013-a1cb0180-af4d-11ea-950c-24582809a0bd.png">
 
 #### Histograms
 What is the frequency distribution of the number (population) of new immigrants from the various countries to Canada in 2013?
@@ -111,6 +116,8 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 ```
+<img width="656" alt="Screen Shot 2020-06-15 at 9 05 07 PM" src="https://user-images.githubusercontent.com/46945617/84721021-a42d5b80-af4d-11ea-97de-5f52e698a502.png">
+
 What are the immigration distribution for Greece, Albania, and Bulgaria for years 1980 - 2013?
 
 ```
@@ -135,6 +142,9 @@ plt.xlabel('Number of Immigrants')
 
 plt.show()
 ```
+![image](https://user-images.githubusercontent.com/46945617/84721214-2289fd80-af4e-11ea-808e-7c25b504ddb2.png)
+<img width="621" alt="Screen Shot 2020-06-15 at 9 06 18 PM" src="https://user-images.githubusercontent.com/46945617/84721025-a7284c00-af4d-11ea-9839-27851c6ad580.png">
+
 #### Bar Charts
 ##### Vertical bar plot
 What are Icelandic immigrants (country = 'Iceland') to Canada from year 1980 to 2013?
@@ -168,6 +178,8 @@ plt.annotate('2008 - 2011 Financial Crisis', # text to display
 
 plt.show()
 ```
+<img width="620" alt="Screen Shot 2020-06-15 at 9 08 12 PM" src="https://user-images.githubusercontent.com/46945617/84721029-aabbd300-af4d-11ea-88bd-5114d8cce6ac.png">
+
 ##### Horizontal Bar Plot
 What are the top 15 countries?
 ```
@@ -190,3 +202,4 @@ for index, value in enumerate(top15):
     
 plt.show()
 ```
+<img width="708" alt="Screen Shot 2020-06-15 at 9 15 54 PM" src="https://user-images.githubusercontent.com/46945617/84721032-ad1e2d00-af4d-11ea-8e82-c760fd6eda78.png">
